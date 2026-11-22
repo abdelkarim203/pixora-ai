@@ -295,11 +295,45 @@ footer {
 
 <header>
   <div class="logo">PIXORA<span> AI</span></div>
+  
+<select id="languageSelect" onchange="changeLanguage(this.value)"
+style="background:#171c2c;color:white;border:1px solid #493477;
+padding:9px;border-radius:9px;max-width:145px;">
+  <option value="en">🇬🇧 English</option>
+  <option value="ar">🇲🇦 العربية</option>
+  <option value="fr">🇫🇷 Français</option>
+  <option value="es">🇪🇸 Español</option>
+  <option value="de">🇩🇪 Deutsch</option>
+  <option value="pt">🇵🇹 Português</option>
+  <option value="it">🇮🇹 Italiano</option>
+  <option value="nl">🇳🇱 Nederlands</option>
+  <option value="tr">🇹🇷 Türkçe</option>
+  <option value="ru">🇷🇺 Русский</option>
+  <option value="zh">🇨🇳 中文</option>
+  <option value="ja">🇯🇵 日本語</option>
+  <option value="ko">🇰🇷 한국어</option>
+  <option value="hi">🇮🇳 हिन्दी</option>
+  <option value="ur">🇵🇰 اردو</option>
+  <option value="id">🇮🇩 Bahasa Indonesia</option>
+  <option value="bn">🇧🇩 বাংলা</option>
+  <option value="pl">🇵🇱 Polski</option>
+  <option value="sv">🇸🇪 Svenska</option>
+  <option value="el">🇬🇷 Ελληνικά</option>
+  <option value="uk">🇺🇦 Українська</option>
+  <option value="vi">🇻🇳 Tiếng Việt</option>
+  <option value="th">🇹🇭 ไทย</option>
+  <option value="fa">🇮🇷 فارسی</option>
+  <option value="he">🇮🇱 עברית</option>
+  <option value="sw">🌍 Kiswahili</option>
+</select>
+
 
   <nav>
-    <a href="#home">Home</a>
-    <a href="#generator">Create</a>
-    <a href="#features">Features</a>
+    <nav>
+  <a href="#home" id="navHome">Home</a>
+  <a href="#generator" id="navCreate">Create</a>
+  <a href="#features" id="navFeatures">Features</a>
+</nav>
   </nav>
 
   <button class="header-btn" onclick="document.getElementById('generator').scrollIntoView({behavior:'smooth'})">
@@ -309,37 +343,39 @@ footer {
 
 <main>
   <section class="hero" id="home">
-    <div class="tag">✦ YOUR CREATIVE AI STUDIO</div>
+    <div class="tag" id="heroTag">✦ YOUR CREATIVE AI STUDIO</div>
 
     <h1>
       Turn Your Ideas Into<br>
-      <span class="gradient">Amazing Creations</span>
+      <span class="gradient" id="heroTitle">Amazing Creations</span>
     </h1>
 
     <p>
-      Bring your imagination to life with AI.
-      Create stunning images and incredible videos
-      from just a simple text prompt.
+      <p id="heroDesc">
+  Bring your imagination to life with AI.
+  Create stunning images and incredible videos
+  from just a simple text prompt.
+</p>
     </p>
   </section>
 
   <section class="generator" id="generator">
     <div class="tabs">
       <button class="tab active" id="imageTab" onclick="switchMode('image')">
-        ✦ AI Image
+  ✦ <span id="imageTabText">AI Image</span>
       </button>
       <button class="tab" id="videoTab" onclick="switchMode('video')">
-        ▶ AI Video
+  ▶ <span id="videoTabText">AI Video</span>
       </button>
     </div>
 
-    <label class="field-label" for="prompt">Describe your imagination</label>
+    <label class="field-label" id="promptLabel" for="prompt">Describe your imagination</label>
 
     <textarea id="prompt" placeholder="Describe what you want to create..."></textarea>
 
     <div class="options">
       <div>
-        <label class="field-label" for="style">Art Style</label>
+        <label class="field-label" id="styleLabel" for="style">Art Style</label>
         <select id="style">
           <option value="Realistic">Realistic</option>
           <option value="3D Animation">3D Animation</option>
@@ -351,7 +387,7 @@ footer {
       </div>
 
       <div>
-        <label class="field-label" for="ratio">Aspect Ratio</label>
+        <label class="field-label" id="ratioLabel" for="ratio">Aspect Ratio</label>
         <select id="ratio">
           <option value="1:1">Square (1:1)</option>
           <option value="16:9">Landscape (16:9)</option>
@@ -361,8 +397,8 @@ footer {
       </div>
     </div>
 
-    <button class="generate" onclick="generateContent()">
-      ✨ Generate <span id="modeText">Image</span>
+    <button class="generate" id="generateBtn" onclick="generateContent()">
+  ✨ <span id="generateText">Generate</span> <span id="modeText">Image</span>
     </button>
 
     <p class="notice" id="message">
@@ -383,26 +419,26 @@ footer {
   </section>
 
   <section class="features" id="features">
-    <h2 class="section-title">Everything You Need to Create</h2>
-    <p class="section-desc">Powerful creative tools in one simple place.</p>
+    <h2 class="section-title" id="featuresTitle">Everything You Need to Create</h2>
+    <p class="section-desc" id="featuresDesc">Powerful creative tools in one simple place.</p>
 
     <div class="feature-grid">
       <div class="feature">
         <div class="feature-icon">🎨</div>
-        <h3>AI Image Generator</h3>
-        <p>Transform your words into beautiful AI artwork and creative images.</p>
+        <h3 id="feature1Title">AI Image Generator</h3>
+<p id="feature1Desc">Transform your words into beautiful AI artwork and creative images.</p>
       </div>
 
       <div class="feature">
         <div class="feature-icon">🎬</div>
-        <h3>AI Video Creator</h3>
-        <p>Bring your ideas to life with exciting AI-generated video creations.</p>
+        <h3 id="feature2Title">AI Video Creator</h3>
+<p id="feature2Desc">Bring your ideas to life with exciting AI-generated video creations.</p>
       </div>
 
       <div class="feature">
         <div class="feature-icon">⚡</div>
-        <h3>Easy to Use</h3>
-        <p>A simple and friendly experience designed for everyone.</p>
+        <h3 id="feature3Title">Easy to Use</h3>
+<p id="feature3Desc">A simple and friendly experience designed for everyone.</p>
       </div>
     </div>
   </section>
