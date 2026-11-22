@@ -372,6 +372,13 @@ footer {
   <img id="generatedImage"
        style="width:100%;border-radius:14px"
        alt="Your generated AI image">
+
+  <button onclick="downloadImage()"
+    style="width:100%;margin-top:14px;padding:15px;
+    border:0;border-radius:12px;background:#7044d8;
+    color:white;font-weight:bold;cursor:pointer;">
+    ⬇ Download Image
+  </button>
 </div>
   </section>
 
@@ -482,7 +489,19 @@ async function generateContent() {
     button.disabled = false;
   }
 }
+function downloadImage() {
+  const image = document.getElementById("generatedImage");
 
+  if (!image.src) return;
+
+  const link = document.createElement("a");
+  link.href = image.src;
+  link.download = "PIXORA-AI-Image.jpg";
+
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+}
 </script>
 
 </body>
