@@ -346,7 +346,7 @@ padding:9px;border-radius:9px;max-width:145px;">
     <div class="tag" id="heroTag">✦ YOUR CREATIVE AI STUDIO</div>
 
     <h1>
-      Turn Your Ideas Into<br>
+      <span id="heroTitleStart">Turn Your Ideas Into</span><br>
       <span class="gradient" id="heroTitle">Amazing Creations</span>
     </h1>
 
@@ -409,7 +409,7 @@ padding:9px;border-radius:9px;max-width:145px;">
        style="width:100%;border-radius:14px"
        alt="Your generated AI image">
 
-  <button onclick="downloadImage()"
+  <button id="downloadBtn" onclick="downloadImage()"
     style="width:100%;margin-top:14px;padding:15px;
     border:0;border-radius:12px;background:#7044d8;
     color:white;font-weight:bold;cursor:pointer;">
@@ -444,32 +444,119 @@ padding:9px;border-radius:9px;max-width:145px;">
   </section>
 </main>
 
-<footer>
+<footer id="footerText">
   © 2026 PIXORA AI. All rights reserved.
 </footer>
 
-<script>
+
+const translations = {
+en: ["Home","Create","Features","Start Creating","✦ YOUR CREATIVE AI STUDIO","Turn Your Ideas Into","Amazing Creations","Bring your imagination to life with AI. Create stunning images and incredible videos from just a simple text prompt.","Describe your imagination","Describe what you want to create...","Art Style","Aspect Ratio","Generate","AI Image","AI Video","Your creativity starts here. Enter a prompt to get started.","Everything You Need to Create","Powerful creative tools in one simple place.","AI Image Generator","Transform your words into beautiful AI artwork and creative images.","AI Video Creator","Bring your ideas to life with exciting AI-generated video creations.","Easy to Use","A simple and friendly experience designed for everyone.","Download Image","© 2026 PIXORA AI. All rights reserved.","Realistic","3D Animation","Anime","Cinematic","Digital Art","Fantasy","Square (1:1)","Landscape (16:9)","Portrait (9:16)","Social (4:5)"],
+ar: ["الرئيسية","إنشاء","المميزات","ابدأ الإنشاء","✦ استوديو الإبداع بالذكاء الاصطناعي","حوّل أفكارك إلى","إبداعات مذهلة","أطلق العنان لخيالك مع الذكاء الاصطناعي. أنشئ صوراً مذهلة وفيديوهات رائعة من خلال وصف نصي بسيط.","صف خيالك","اكتب ما تريد إنشاءه...","نمط الفن","نسبة العرض","إنشاء","صورة AI","فيديو AI","ابدأ إبداعك هنا. اكتب وصفاً للبدء.","كل ما تحتاجه للإبداع","أدوات إبداعية قوية في مكان واحد.","مولّد الصور بالذكاء الاصطناعي","حوّل كلماتك إلى صور وأعمال فنية جميلة.","منشئ الفيديو بالذكاء الاصطناعي","حوّل أفكارك إلى فيديوهات مذهلة.","سهل الاستخدام","تجربة بسيطة ومناسبة للجميع.","تحميل الصورة","© 2026 PIXORA AI. جميع الحقوق محفوظة.","واقعي","رسوم ثلاثية الأبعاد","أنمي","سينمائي","فن رقمي","خيالي","مربع (1:1)","أفقي (16:9)","عمودي (9:16)","اجتماعي (4:5)"],
+fr: ["Accueil","Créer","Fonctionnalités","Commencer","✦ VOTRE STUDIO IA CRÉATIF","Transformez vos idées en","Créations incroyables","Donnez vie à votre imagination avec l'IA. Créez des images et vidéos incroyables à partir d'un simple texte.","Décrivez votre imagination","Décrivez ce que vous voulez créer...","Style artistique","Format","Générer","Image IA","Vidéo IA","Votre créativité commence ici. Entrez une description.","Tout pour créer","Des outils créatifs puissants au même endroit.","Générateur d'images IA","Transformez vos mots en magnifiques images.","Créateur de vidéos IA","Donnez vie à vos idées avec des vidéos IA.","Facile à utiliser","Une expérience simple pour tous.","Télécharger l'image","© 2026 PIXORA AI. Tous droits réservés.","Réaliste","Animation 3D","Anime","Cinématique","Art numérique","Fantaisie","Carré (1:1)","Paysage (16:9)","Portrait (9:16)","Social (4:5)"],
+es: ["Inicio","Crear","Funciones","Empezar","✦ TU ESTUDIO CREATIVO DE IA","Convierte tus ideas en","Creaciones increíbles","Da vida a tu imaginación con IA. Crea imágenes y vídeos increíbles con un simple texto.","Describe tu imaginación","Describe lo que quieres crear...","Estilo artístico","Relación de aspecto","Generar","Imagen IA","Vídeo IA","Tu creatividad empieza aquí. Escribe una descripción.","Todo lo que necesitas para crear","Herramientas creativas en un solo lugar.","Generador de imágenes IA","Convierte tus palabras en hermosas imágenes.","Creador de vídeos IA","Da vida a tus ideas con vídeos generados por IA.","Fácil de usar","Una experiencia sencilla para todos.","Descargar imagen","© 2026 PIXORA AI. Todos los derechos reservados.","Realista","Animación 3D","Anime","Cinematográfico","Arte digital","Fantasía","Cuadrado (1:1)","Horizontal (16:9)","Vertical (9:16)","Social (4:5)"],
+de: ["Startseite","Erstellen","Funktionen","Jetzt starten","✦ DEIN KREATIVES KI-STUDIO","Verwandle deine Ideen in","Erstaunliche Kreationen","Erwecke deine Fantasie mit KI zum Leben. Erstelle beeindruckende Bilder und Videos aus Text.","Beschreibe deine Vorstellung","Beschreibe, was du erstellen möchtest...","Kunststil","Seitenverhältnis","Erstellen","KI-Bild","KI-Video","Deine Kreativität beginnt hier. Gib eine Beschreibung ein.","Alles, was du zum Erstellen brauchst","Leistungsstarke kreative Tools an einem Ort.","KI-Bildgenerator","Verwandle deine Worte in wunderschöne KI-Bilder.","KI-Videoersteller","Erwecke deine Ideen mit KI-Videos zum Leben.","Einfach zu bedienen","Eine einfache Erfahrung für alle.","Bild herunterladen","© 2026 PIXORA AI. Alle Rechte vorbehalten.","Realistisch","3D-Animation","Anime","Filmisch","Digitale Kunst","Fantasy","Quadrat (1:1)","Querformat (16:9)","Hochformat (9:16)","Social (4:5)"],
+pt: ["Início","Criar","Recursos","Começar","✦ SEU ESTÚDIO CRIATIVO DE IA","Transforme suas ideias em","Criações incríveis","Dê vida à sua imaginação com IA. Crie imagens e vídeos incríveis com um simples texto.","Descreva sua imaginação","Descreva o que deseja criar...","Estilo artístico","Proporção","Gerar","Imagem IA","Vídeo IA","Sua criatividade começa aqui. Digite uma descrição.","Tudo o que você precisa para criar","Ferramentas criativas poderosas em um só lugar.","Gerador de imagens IA","Transforme suas palavras em belas imagens.","Criador de vídeos IA","Dê vida às suas ideias com vídeos de IA.","Fácil de usar","Uma experiência simples para todos.","Baixar imagem","© 2026 PIXORA AI. Todos os direitos reservados.","Realista","Animação 3D","Anime","Cinematográfico","Arte digital","Fantasia","Quadrado (1:1)","Paisagem (16:9)","Retrato (9:16)","Social (4:5)"],
+it: ["Home","Crea","Funzioni","Inizia","✦ IL TUO STUDIO CREATIVO IA","Trasforma le tue idee in","Creazioni incredibili","Dai vita alla tua immaginazione con l'IA. Crea immagini e video incredibili da un semplice testo.","Descrivi la tua immaginazione","Descrivi cosa vuoi creare...","Stile artistico","Proporzioni","Genera","Immagine IA","Video IA","La tua creatività inizia qui. Inserisci una descrizione.","Tutto ciò che serve per creare","Potenti strumenti creativi in un unico posto.","Generatore immagini IA","Trasforma le tue parole in splendide immagini.","Creatore video IA","Dai vita alle tue idee con video IA.","Facile da usare","Un'esperienza semplice per tutti.","Scarica immagine","© 2026 PIXORA AI. Tutti i diritti riservati.","Realistico","Animazione 3D","Anime","Cinematografico","Arte digitale","Fantasy","Quadrato (1:1)","Orizzontale (16:9)","Verticale (9:16)","Social (4:5)"],
+nl: ["Home","Maken","Functies","Beginnen","✦ JOUW CREATIEVE AI-STUDIO","Verander je ideeën in","Geweldige creaties","Breng je verbeelding tot leven met AI. Maak geweldige afbeeldingen en video's met tekst.","Beschrijf je verbeelding","Beschrijf wat je wilt maken...","Kunststijl","Beeldverhouding","Genereren","AI-afbeelding","AI-video","Je creativiteit begint hier. Voer een beschrijving in.","Alles wat je nodig hebt om te creëren","Krachtige creatieve tools op één plek.","AI-afbeeldinggenerator","Verander woorden in prachtige AI-kunst.","AI-videomaker","Breng je ideeën tot leven met AI-video's.","Eenvoudig te gebruiken","Een eenvoudige ervaring voor iedereen.","Afbeelding downloaden","© 2026 PIXORA AI. Alle rechten voorbehouden.","Realistisch","3D-animatie","Anime","Filmisch","Digitale kunst","Fantasie","Vierkant (1:1)","Liggend (16:9)","Staand (9:16)","Social (4:5)"],
+tr: ["Ana Sayfa","Oluştur","Özellikler","Başla","✦ YARATICI YAPAY ZEKA STÜDYON","Fikirlerini dönüştür","Harika Kreasyonlara","Yapay zeka ile hayal gücünü hayata geçir. Basit bir metinle harika görseller ve videolar oluştur.","Hayalini anlat","Ne oluşturmak istediğini yaz...","Sanat Stili","En Boy Oranı","Oluştur","Yapay Zeka Görseli","Yapay Zeka Videosu","Yaratıcılığın burada başlıyor. Bir açıklama gir.","Oluşturmak İçin Her Şey","Tek bir yerde güçlü yaratıcı araçlar.","Yapay Zeka Görsel Oluşturucu","Kelimelerini güzel görsellere dönüştür.","Yapay Zeka Video Oluşturucu","Fikirlerini yapay zeka videolarıyla canlandır.","Kullanımı Kolay","Herkes için basit bir deneyim.","Görseli İndir","© 2026 PIXORA AI. Tüm hakları saklıdır.","Gerçekçi","3D Animasyon","Anime","Sinematik","Dijital Sanat","Fantastik","Kare (1:1)","Yatay (16:9)","Dikey (9:16)","Sosyal (4:5)"],
+ru: ["Главная","Создать","Возможности","Начать","✦ ТВОРЧЕСКАЯ AI-СТУДИЯ","Превратите идеи в","Потрясающие творения","Воплотите воображение с помощью ИИ. Создавайте изображения и видео из текста.","Опишите свою идею","Опишите, что хотите создать...","Стиль","Соотношение сторон","Создать","AI-изображение","AI-видео","Ваше творчество начинается здесь. Введите описание.","Всё для творчества","Мощные творческие инструменты в одном месте.","Генератор AI-изображений","Превратите слова в красивые изображения.","Создатель AI-видео","Оживите свои идеи с помощью AI-видео.","Просто использовать","Простой интерфейс для каждого.","Скачать изображение","© 2026 PIXORA AI. Все права защищены.","Реалистичный","3D-анимация","Аниме","Кинематографичный","Цифровое искусство","Фэнтези","Квадрат (1:1)","Альбомный (16:9)","Портретный (9:16)","Социальный (4:5)"],
+zh: ["首页","创作","功能","开始创作","✦ 你的创意 AI 工作室","将你的想法变成","精彩作品","用 AI 将想象变为现实。只需输入文字即可创建精美图片和视频。","描述你的想象","描述你想创建的内容...","艺术风格","宽高比","生成","AI 图片","AI 视频","创意从这里开始。输入描述即可开始。","创作所需的一切","强大的创意工具尽在一处。","AI 图片生成器","将文字变成精美的 AI 艺术作品。","AI 视频创作","用 AI 视频让你的想法栩栩如生。","简单易用","为每个人设计的简单体验。","下载图片","© 2026 PIXORA AI. 保留所有权利。","写实","3D 动画","动漫","电影风格","数字艺术","幻想","正方形 (1:1)","横向 (16:9)","纵向 (9:16)","社交 (4:5)"],
+ja: ["ホーム","作成","機能","始める","✦ あなたのクリエイティブAIスタジオ","アイデアを","素晴らしい作品に","AIで想像力を形にしましょう。テキストから美しい画像や動画を作成できます。","イメージを説明","作成したいものを入力...","アートスタイル","アスペクト比","生成","AI画像","AI動画","ここから創造が始まります。説明を入力してください。","創作に必要なすべて","強力なクリエイティブツールをひとつに。","AI画像ジェネレーター","言葉を美しいAIアートに変換します。","AI動画クリエイター","AI動画でアイデアを形にします。","簡単に使える","誰でも使いやすいシンプルな体験。","画像をダウンロード","© 2026 PIXORA AI. All rights reserved.","リアル","3Dアニメーション","アニメ","映画風","デジタルアート","ファンタジー","正方形 (1:1)","横長 (16:9)","縦長 (9:16)","ソーシャル (4:5)"],
+ko: ["홈","만들기","기능","시작하기","✦ 나만의 AI 크리에이티브 스튜디오","아이디어를","놀라운 작품으로","AI로 상상력을 현실로 만드세요. 간단한 텍스트로 멋진 이미지와 영상을 만드세요.","상상하는 내용을 설명하세요","만들고 싶은 내용을 입력하세요...","아트 스타일","화면 비율","생성","AI 이미지","AI 비디오","여기서 창의력이 시작됩니다. 설명을 입력하세요.","창작에 필요한 모든 것","강력한 창작 도구를 한곳에서.","AI 이미지 생성기","단어를 아름다운 AI 이미지로 바꿔보세요.","AI 비디오 제작기","AI 영상으로 아이디어를 실현하세요.","사용하기 쉬움","모두를 위한 간단한 경험.","이미지 다운로드","© 2026 PIXORA AI. 모든 권리 보유.","사실적","3D 애니메이션","애니메이션","영화 같은","디지털 아트","판타지","정사각형 (1:1)","가로 (16:9)","세로 (9:16)","소셜 (4:5)"],
+hi: ["होम","बनाएं","विशेषताएं","शुरू करें","✦ आपका क्रिएटिव AI स्टूडियो","अपने विचारों को बदलें","शानदार रचनाओं में","AI के साथ अपनी कल्पना को जीवंत करें। केवल टेक्स्ट से शानदार चित्र और वीडियो बनाएं।","अपनी कल्पना बताएं","बताएं कि आप क्या बनाना चाहते हैं...","कला शैली","आस्पेक्ट अनुपात","बनाएं","AI चित्र","AI वीडियो","आपकी रचनात्मकता यहां शुरू होती है। विवरण लिखें।","बनाने के लिए सब कुछ","शक्तिशाली रचनात्मक टूल एक ही जगह।","AI चित्र जनरेटर","अपने शब्दों को सुंदर AI कला में बदलें।","AI वीडियो निर्माता","AI वीडियो से अपने विचारों को जीवंत करें।","उपयोग में आसान","सभी के लिए सरल अनुभव।","चित्र डाउनलोड करें","© 2026 PIXORA AI. सर्वाधिकार सुरक्षित।","वास्तविक","3D एनीमेशन","एनीमे","सिनेमाई","डिजिटल कला","काल्पनिक","वर्ग (1:1)","लैंडस्केप (16:9)","पोर्ट्रेट (9:16)","सोशल (4:5)"],
+ur: ["صفحہ اول","بنائیں","خصوصیات","شروع کریں","✦ آپ کا تخلیقی AI اسٹوڈیو","اپنے خیالات کو بدلیں","شاندار تخلیقات میں","AI کے ساتھ اپنے تصور کو حقیقت بنائیں۔ صرف متن سے خوبصورت تصاویر اور ویڈیوز بنائیں۔","اپنا تصور بیان کریں","بتائیں آپ کیا بنانا چاہتے ہیں...","آرٹ اسٹائل","تناسب","بنائیں","AI تصویر","AI ویڈیو","آپ کی تخلیقی صلاحیت یہاں شروع ہوتی ہے۔ تفصیل لکھیں۔","تخلیق کے لیے سب کچھ","طاقتور تخلیقی ٹولز ایک جگہ۔","AI تصویر بنانے والا","اپنے الفاظ کو خوبصورت تصاویر میں بدلیں۔","AI ویڈیو بنانے والا","AI ویڈیوز سے اپنے خیالات کو زندہ کریں۔","استعمال میں آسان","ہر ایک کے لیے آسان تجربہ۔","تصویر ڈاؤن لوڈ کریں","© 2026 PIXORA AI. جملہ حقوق محفوظ ہیں۔","حقیقت پسندانہ","3D اینیمیشن","اینیمی","سنیماٹک","ڈیجیٹل آرٹ","فینٹسی","مربع (1:1)","افقی (16:9)","عمودی (9:16)","سوشل (4:5)"],
+id: ["Beranda","Buat","Fitur","Mulai Membuat","✦ STUDIO KREATIF AI ANDA","Ubah Ide Anda Menjadi","Kreasi Menakjubkan","Hidupkan imajinasi Anda dengan AI. Buat gambar dan video menakjubkan dari teks sederhana.","Jelaskan imajinasi Anda","Jelaskan apa yang ingin Anda buat...","Gaya Seni","Rasio Aspek","Buat","Gambar AI","Video AI","Kreativitas Anda dimulai di sini. Masukkan deskripsi.","Semua yang Anda Butuhkan","Alat kreatif hebat di satu tempat.","Generator Gambar AI","Ubah kata-kata menjadi karya seni yang indah.","Pembuat Video AI","Hidupkan ide Anda dengan video AI.","Mudah Digunakan","Pengalaman sederhana untuk semua orang.","Unduh Gambar","© 2026 PIXORA AI. Hak cipta dilindungi.","Realistis","Animasi 3D","Anime","Sinematik","Seni Digital","Fantasi","Persegi (1:1)","Lanskap (16:9)","Potret (9:16)","Sosial (4:5)"],
+bn: ["হোম","তৈরি করুন","বৈশিষ্ট্য","শুরু করুন","✦ আপনার সৃজনশীল AI স্টুডিও","আপনার ধারণাকে রূপ দিন","অসাধারণ সৃষ্টিতে","AI দিয়ে আপনার কল্পনাকে বাস্তবে রূপ দিন। শুধু লেখা থেকে ছবি ও ভিডিও তৈরি করুন।","আপনার কল্পনা বর্ণনা করুন","আপনি কী তৈরি করতে চান লিখুন...","শিল্পের ধরন","অনুপাত","তৈরি করুন","AI ছবি","AI ভিডিও","আপনার সৃজনশীলতা এখানেই শুরু। একটি বর্ণনা লিখুন।","তৈরির জন্য সবকিছু","এক জায়গায় শক্তিশালী সৃজনশীল সরঞ্জাম।","AI ছবি জেনারেটর","আপনার শব্দকে সুন্দর ছবিতে রূপ দিন।","AI ভিডিও নির্মাতা","AI ভিডিও দিয়ে আপনার ধারণাকে জীবন্ত করুন।","ব্যবহার করা সহজ","সবার জন্য সহজ অভিজ্ঞতা।","ছবি ডাউনলোড","© 2026 PIXORA AI. সর্বস্বত্ব সংরক্ষিত।","বাস্তবসম্মত","3D অ্যানিমেশন","অ্যানিমে","সিনেমাটিক","ডিজিটাল আর্ট","ফ্যান্টাসি","বর্গ (1:1)","ল্যান্ডস্কেপ (16:9)","পোর্ট্রেট (9:16)","সোশ্যাল (4:5)"],
+pl: ["Strona główna","Utwórz","Funkcje","Zacznij","✦ TWOJE KREATYWNE STUDIO AI","Zamień pomysły w","Niesamowite kreacje","Ożyw swoją wyobraźnię dzięki AI. Twórz wspaniałe obrazy i filmy z tekstu.","Opisz swoją wyobraźnię","Opisz, co chcesz stworzyć...","Styl artystyczny","Proporcje obrazu","Generuj","Obraz AI","Wideo AI","Twoja kreatywność zaczyna się tutaj. Wpisz opis.","Wszystko, czego potrzebujesz","Potężne narzędzia kreatywne w jednym miejscu.","Generator obrazów AI","Zamień słowa w piękne obrazy.","Kreator wideo AI","Ożyw swoje pomysły dzięki filmom AI.","Łatwy w użyciu","Proste doświadczenie dla każdego.","Pobierz obraz","© 2026 PIXORA AI. Wszelkie prawa zastrzeżone.","Realistyczny","Animacja 3D","Anime","Kinowy","Sztuka cyfrowa","Fantasy","Kwadrat (1:1)","Poziomy (16:9)","Pionowy (9:16)","Social (4:5)"],
+sv: ["Hem","Skapa","Funktioner","Börja skapa","✦ DIN KREATIVA AI-STUDIO","Förvandla dina idéer till","Fantastiska skapelser","Ge din fantasi liv med AI. Skapa bilder och videor från enkel text.","Beskriv din fantasi","Beskriv vad du vill skapa...","Konststil","Bildförhållande","Generera","AI-bild","AI-video","Din kreativitet börjar här. Skriv en beskrivning.","Allt du behöver för att skapa","Kraftfulla kreativa verktyg på ett ställe.","AI-bildgenerator","Förvandla ord till vackra bilder.","AI-videoskapare","Ge dina idéer liv med AI-videor.","Lätt att använda","En enkel upplevelse för alla.","Ladda ner bild","© 2026 PIXORA AI. Alla rättigheter förbehållna.","Realistisk","3D-animation","Anime","Filmisk","Digital konst","Fantasy","Kvadrat (1:1)","Liggande (16:9)","Stående (9:16)","Social (4:5)"],
+el: ["Αρχική","Δημιουργία","Χαρακτηριστικά","Ξεκινήστε","✦ ΤΟ ΔΗΜΙΟΥΡΓΙΚΟ ΣΑΣ AI STUDIO","Μετατρέψτε τις ιδέες σας σε","Καταπληκτικές δημιουργίες","Δώστε ζωή στη φαντασία σας με AI. Δημιουργήστε εικόνες και βίντεο από απλό κείμενο.","Περιγράψτε τη φαντασία σας","Περιγράψτε τι θέλετε να δημιουργήσετε...","Καλλιτεχνικό στυλ","Αναλογία εικόνας","Δημιουργία","AI εικόνα","AI βίντεο","Η δημιουργικότητά σας ξεκινά εδώ. Γράψτε μια περιγραφή.","Όλα όσα χρειάζεστε","Ισχυρά δημιουργικά εργαλεία σε ένα μέρος.","Δημιουργία εικόνων AI","Μετατρέψτε τις λέξεις σας σε όμορφες εικόνες.","Δημιουργία βίντεο AI","Δώστε ζωή στις ιδέες σας με βίντεο AI.","Εύκολο στη χρήση","Μια απλή εμπειρία για όλους.","Λήψη εικόνας","© 2026 PIXORA AI. Με επιφύλαξη παντός δικαιώματος.","Ρεαλιστικό","3D animation","Anime","Κινηματογραφικό","Ψηφιακή τέχνη","Φαντασία","Τετράγωνο (1:1)","Οριζόντιο (16:9)","Κάθετο (9:16)","Social (4:5)"],
+uk: ["Головна","Створити","Можливості","Почати","✦ ВАША ТВОРЧА AI-СТУДІЯ","Перетворіть свої ідеї на","Дивовижні творіння","Втілюйте уяву за допомогою ШІ. Створюйте зображення та відео з тексту.","Опишіть свою уяву","Опишіть, що хочете створити...","Художній стиль","Співвідношення сторін","Створити","AI-зображення","AI-відео","Ваша творчість починається тут. Введіть опис.","Усе для творчості","Потужні творчі інструменти в одному місці.","Генератор AI-зображень","Перетворіть слова на красиві зображення.","Створювач AI-відео","Оживіть свої ідеї за допомогою AI-відео.","Легко використовувати","Простий досвід для кожного.","Завантажити зображення","© 2026 PIXORA AI. Усі права захищені.","Реалістичний","3D-анімація","Аніме","Кінематографічний","Цифрове мистецтво","Фентезі","Квадрат (1:1)","Альбомний (16:9)","Портретний (9:16)","Соціальний (4:5)"],
+vi: ["Trang chủ","Tạo","Tính năng","Bắt đầu","✦ STUDIO SÁNG TẠO AI CỦA BẠN","Biến ý tưởng thành","Những sáng tạo tuyệt vời","Thổi sức sống vào trí tưởng tượng bằng AI. Tạo hình ảnh và video từ văn bản.","Mô tả trí tưởng tượng của bạn","Mô tả nội dung bạn muốn tạo...","Phong cách nghệ thuật","Tỷ lệ khung hình","Tạo","Ảnh AI","Video AI","Sự sáng tạo bắt đầu tại đây. Nhập mô tả để bắt đầu.","Mọi thứ bạn cần để sáng tạo","Công cụ sáng tạo mạnh mẽ trong một nơi.","Trình tạo ảnh AI","Biến từ ngữ thành hình ảnh tuyệt đẹp.","Trình tạo video AI","Biến ý tưởng thành video AI sống động.","Dễ sử dụng","Trải nghiệm đơn giản dành cho mọi người.","Tải ảnh xuống","© 2026 PIXORA AI. Đã đăng ký bản quyền.","Chân thực","Hoạt hình 3D","Anime","Điện ảnh","Nghệ thuật số","Giả tưởng","Vuông (1:1)","Ngang (16:9)","Dọc (9:16)","Mạng xã hội (4:5)"],
+th: ["หน้าแรก","สร้าง","คุณสมบัติ","เริ่มสร้าง","✦ สตูดิโอสร้างสรรค์ AI ของคุณ","เปลี่ยนไอเดียให้เป็น","ผลงานสุดมหัศจรรย์","ปลดปล่อยจินตนาการด้วย AI สร้างภาพและวิดีโอจากข้อความง่าย ๆ","อธิบายจินตนาการของคุณ","อธิบายสิ่งที่คุณต้องการสร้าง...","สไตล์ศิลปะ","อัตราส่วนภาพ","สร้าง","ภาพ AI","วิดีโอ AI","เริ่มสร้างสรรค์ได้ที่นี่ พิมพ์คำอธิบายเพื่อเริ่มต้น","ทุกสิ่งที่คุณต้องการ","เครื่องมือสร้างสรรค์ทรงพลังในที่เดียว","เครื่องมือสร้างภาพ AI","เปลี่ยนคำพูดให้เป็นภาพศิลปะที่สวยงาม","เครื่องมือสร้างวิดีโอ AI","ทำให้ไอเดียของคุณมีชีวิตด้วยวิดีโอ AI","ใช้งานง่าย","ประสบการณ์ที่เรียบง่ายสำหรับทุกคน","ดาวน์โหลดภาพ","© 2026 PIXORA AI. สงวนลิขสิทธิ์","สมจริง","แอนิเมชัน 3 มิติ","อนิเมะ","ภาพยนตร์","ศิลปะดิจิทัล","แฟนตาซี","สี่เหลี่ยม (1:1)","แนวนอน (16:9)","แนวตั้ง (9:16)","โซเชียล (4:5)"],
+fa: ["خانه","ایجاد","امکانات","شروع کنید","✦ استودیوی خلاقانه هوش مصنوعی شما","ایده‌های خود را تبدیل کنید به","آثار شگفت‌انگیز","با هوش مصنوعی به تخیل خود جان ببخشید. با یک متن ساده تصویر و ویدیو بسازید.","تخیل خود را توصیف کنید","آنچه می‌خواهید بسازید را بنویسید...","سبک هنری","نسبت تصویر","ایجاد","تصویر هوش مصنوعی","ویدیوی هوش مصنوعی","خلاقیت شما از اینجا شروع می‌شود. توضیحی وارد کنید.","همه چیز برای خلق کردن","ابزارهای خلاقانه قدرتمند در یک مکان.","سازنده تصویر هوش مصنوعی","کلمات خود را به تصاویر زیبا تبدیل کنید.","سازنده ویدیوی هوش مصنوعی","ایده‌های خود را با ویدیوهای هوش مصنوعی زنده کنید.","استفاده آسان","تجربه‌ای ساده برای همه.","دانلود تصویر","© 2026 PIXORA AI. تمامی حقوق محفوظ است.","واقع‌گرایانه","انیمیشن سه‌بعدی","انیمه","سینمایی","هنر دیجیتال","فانتزی","مربع (1:1)","افقی (16:9)","عمودی (9:16)","اجتماعی (4:5)"],
+he: ["דף הבית","יצירה","תכונות","התחל ליצור","✦ סטודיו ה-AI היצירתי שלך","הפוך את הרעיונות שלך ל","יצירות מדהימות","הפוך את הדמיון למציאות בעזרת AI. צור תמונות וסרטונים מטקסט פשוט.","תאר את הדמיון שלך","תאר מה תרצה ליצור...","סגנון אמנותי","יחס תמונה","צור","תמונת AI","סרטון AI","היצירתיות שלך מתחילה כאן. הזן תיאור כדי להתחיל.","כל מה שצריך כדי ליצור","כלים יצירתיים רבי עוצמה במקום אחד.","מחולל תמונות AI","הפוך מילים ליצירות אמנות יפהפיות.","יוצר סרטוני AI","הפוך רעיונות לחיים בעזרת סרטוני AI.","קל לשימוש","חוויה פשוטה לכולם.","הורד תמונה","© 2026 PIXORA AI. כל הזכויות שמורות.","מציאותי","אנימציה תלת־ממדית","אנימה","קולנועי","אמנות דיגיטלית","פנטזיה","ריבוע (1:1)","לרוחב (16:9)","לאורך (9:16)","חברתי (4:5)"],
+sw: ["Nyumbani","Unda","Vipengele","Anza Kuunda","✦ STUDIO YAKO YA UBUNIFU WA AI","Geuza Mawazo Yako Kuwa","Ubunifu wa Ajabu","Fanya mawazo yako yawe halisi kwa AI. Unda picha na video nzuri kwa maandishi rahisi.","Eleza mawazo yako","Eleza unachotaka kuunda...","Mtindo wa Sanaa","Uwiano wa Picha","Tengeneza","Picha ya AI","Video ya AI","Ubunifu wako unaanzia hapa. Weka maelezo ili kuanza.","Kila Kitu Unachohitaji","Zana bora za ubunifu mahali pamoja.","Kizalishaji cha Picha za AI","Geuza maneno yako kuwa picha nzuri.","Mtengenezaji wa Video za AI","Yafanye mawazo yako yawe hai kwa video za AI.","Rahisi Kutumia","Uzoefu rahisi kwa kila mtu.","Pakua Picha","© 2026 PIXORA AI. Haki zote zimehifadhiwa.","Halisi","Uhuishaji wa 3D","Anime","Sinema","Sanaa ya Dijitali","Ndoto","Mraba (1:1)","Mlalo (16:9)","Wima (9:16)","Kijamii (4:5)"]
+};
+
+const rtlLanguages = ["ar", "ur", "fa", "he"];
+
+const messages = {
+  en: ["Please enter a description first.","✨ Creating your image... Please wait.","🎉 Your image is ready!","AI Video generation is coming soon."],
+  ar: ["يرجى كتابة وصف أولاً.","✨ جارٍ إنشاء صورتك... يرجى الانتظار.","🎉 صورتك جاهزة!","إنشاء الفيديو بالذكاء الاصطناعي قريباً."],
+  fr: ["Veuillez d'abord saisir une description.","✨ Création de votre image... Patientez.","🎉 Votre image est prête !","La génération vidéo IA arrive bientôt."],
+  es: ["Escribe una descripción primero.","✨ Creando tu imagen... Espera.","🎉 ¡Tu imagen está lista!","La generación de vídeo IA llegará pronto."]
+};
 
 let currentMode = "image";
+let currentLanguage = "en";
+
+function getText() {
+  return translations[currentLanguage] || translations.en;
+}
+
+function changeLanguage(language) {
+  currentLanguage = translations[language] ? language : "en";
+  sessionStorage.setItem("pixoraLanguage", currentLanguage);
+
+  const t = getText();
+  const ids = [
+    "navHome","navCreate","navFeatures","startBtn","heroTag",
+    "heroTitleStart","heroTitle","heroDesc","promptLabel",
+    "styleLabel","ratioLabel","generateText","imageTabText",
+    "videoTabText","featuresTitle","featuresDesc",
+    "feature1Title","feature1Desc","feature2Title","feature2Desc",
+    "feature3Title","feature3Desc","downloadBtn","footerText"
+  ];
+
+  const indexes = [0,1,2,3,4,5,6,7,8,10,11,12,13,14,16,17,18,19,20,21,22,23,24,25];
+
+  ids.forEach((id, i) => {
+    const element = document.getElementById(id);
+    if (element) element.textContent = t[indexes[i]];
+  });
+
+  document.getElementById("prompt").placeholder = t[9];
+
+  const style = document.getElementById("style");
+  for (let i = 0; i < 6; i++) style.options[i].text = t[26 + i];
+
+  const ratio = document.getElementById("ratio");
+  for (let i = 0; i < 4; i++) ratio.options[i].text = t[32 + i];
+
+  document.documentElement.lang = currentLanguage;
+  document.documentElement.dir = rtlLanguages.includes(currentLanguage) ? "rtl" : "ltr";
+  document.body.style.direction = document.documentElement.dir;
+
+  updateModeText();
+  updateNotice();
+}
+
+function updateModeText() {
+  const t = getText();
+  document.getElementById("modeText").textContent =
+    currentMode === "image" ? t[13].replace("AI ","") : t[14].replace("AI ","");
+}
+
+function updateNotice() {
+  const m = messages[currentLanguage] || messages.en;
+  document.getElementById("message").textContent =
+    currentMode === "image" ? getText()[15] : m[3];
+}
 
 function switchMode(mode) {
   currentMode = mode;
+  const t = getText();
 
   document.getElementById("imageTab").classList.toggle("active", mode === "image");
   document.getElementById("videoTab").classList.toggle("active", mode === "video");
 
-  document.getElementById("modeText").textContent =
-    mode === "image" ? "Image" : "Video";
+  updateModeText();
 
   document.getElementById("prompt").placeholder =
-    mode === "image"
-      ? "Describe the image you want to create..."
-      : "Describe the video you want to create...";
+    mode === "image" ? t[9] : t[9];
 
   document.getElementById("message").textContent =
-    mode === "image"
-      ? "Create amazing images from your imagination."
-      : "Video generation is coming soon.";
+    mode === "image" ? t[15] : (messages[currentLanguage] || messages.en)[3];
 
   document.getElementById("result").style.display = "none";
 }
@@ -479,20 +566,21 @@ async function generateContent() {
   const message = document.getElementById("message");
   const button = document.querySelector(".generate");
   const resultBox = document.getElementById("result");
+  const m = messages[currentLanguage] || messages.en;
 
   if (!prompt) {
-    message.textContent = "Please enter a description first.";
+    message.textContent = m[0];
     return;
   }
 
   if (currentMode === "video") {
-    message.textContent = "AI Video generation is coming soon.";
+    message.textContent = m[3];
     return;
   }
 
   button.disabled = true;
   resultBox.style.display = "none";
-  message.textContent = "✨ Creating your image... Please wait.";
+  message.textContent = m[1];
 
   try {
     const style = document.getElementById("style").value;
@@ -517,7 +605,7 @@ async function generateContent() {
 
     document.getElementById("generatedImage").src = data.image;
     resultBox.style.display = "block";
-    message.textContent = "🎉 Your image is ready!";
+    message.textContent = m[2];
 
   } catch (error) {
     message.textContent = "Error: " + error.message;
@@ -525,20 +613,24 @@ async function generateContent() {
     button.disabled = false;
   }
 }
+
 function downloadImage() {
   const image = document.getElementById("generatedImage");
-
   if (!image.src) return;
 
   const link = document.createElement("a");
   link.href = image.src;
   link.download = "PIXORA-AI-Image.jpg";
-
   document.body.appendChild(link);
   link.click();
   link.remove();
 }
-</script>
+
+// Restore language only for this browser tab/session.
+const savedLanguage = sessionStorage.getItem("pixoraLanguage") || "en";
+document.getElementById("languageSelect").value = savedLanguage;
+changeLanguage(savedLanguage);
+
 
 </body>
 </html>
